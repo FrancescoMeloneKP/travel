@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema"
+	xmlns:t="http://www.example.org/types"
+	targetNamespace="http://www.example.org/RegisterUser"
+	xmlns:tns="http://www.example.org/RegisterUser"
+	elementFormDefault="qualified">
+	<import namespace="http://www.example.org/types"
+		schemaLocation="types.xsd"></import>
+	<complexType name="RegisterUserInput_type">
+		<sequence>
+			<element name="regu_input" type="t:UserInfo_type" minOccurs="1"
+				maxOccurs="1" />
+		</sequence>
+	</complexType>
+	<complexType name="RegisterUserOutput_type">
+		<sequence>
+			<element name="regu_output" type="t:id_type" minOccurs="1"
+				maxOccurs="1" />
+		</sequence>
+	</complexType>
+	<element name="register_user_input"
+		type="tns:RegisterUserInput_type" />
+	<element name="register_user_output"
+		type="tns:RegisterUserOutput_type" />
+</schema>

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema"
+	xmlns:t="http://www.example.org/types"
+	targetNamespace="http://www.example.org/RetrieveUser"
+	xmlns:tns="http://www.example.org/RetrieveUser"
+	elementFormDefault="qualified">
+	<import namespace="http://www.example.org/types"
+		schemaLocation="types.xsd"></import>
+	<complexType name="RetrieveUserInput_type">
+		<sequence>
+			<element name="retu_input" type="t:id_type" minOccurs="1"
+				maxOccurs="1" />
+		</sequence>
+	</complexType>
+	<complexType name="RetrieveUserOutput_type">
+		<sequence>
+			<element name="retu_output" type="t:UserInfo_type" minOccurs="1"
+				maxOccurs="1" />
+		</sequence>
+	</complexType>
+	<element name="retrieve_user_input"
+		type="tns:RetrieveUserInput_type" />
+	<element name="retrieve_user_output"
+		type="tns:RetrieveUserOutput_type" />
+</schema>

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<wsdl:definitions
+	xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+	xmlns:tns="http://www.tibco.com/UserManager/"
+	xmlns:reg="http://www.example.org/RegisterUser"
+	xmlns:ret="http://www.example.org/RetrieveUser"
+	xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="UserManager"
+	targetNamespace="http://www.tibco.com/UserManager/">
+	<wsdl:import namespace="http://www.example.org/RegisterUser"
+		location="../Schemas/RegisterUser.xsd"/>
+	<wsdl:import namespace="http://www.example.org/RetrieveUser"
+		location="../Schemas/RetrieveUser.xsd" />
+	<wsdl:message name="RegisterUserRequest">
+		<wsdl:part type="reg:RegisterUserInput_type" name="body" />
+	</wsdl:message>
+	<wsdl:message name="RegisterUserResponse">
+		<wsdl:part type="reg:RegisterUserOutput_type" name="body" />
+	</wsdl:message>
+	<wsdl:message name="RetrieveUserRequest">
+		<wsdl:part type="ret:RetrieveUserInput_type" name="body" />
+	</wsdl:message>
+	<wsdl:message name="RetrieveUserResponse">
+		<wsdl:part type="ret:RetrieveUserOutput_type" name="body" />
+	</wsdl:message>
+	<wsdl:portType name="UserManager">
+		<wsdl:operation name="RegisterUser">
+			<wsdl:input message="tns:RegisterUserRequest" />
+			<wsdl:output message="tns:RegisterUserResponse" />
+		</wsdl:operation>
+		<wsdl:operation name="RetrieveUser">
+			<wsdl:input message="tns:RetrieveUserRequest" />
+			<wsdl:output message="tns:RetrieveUserResponse" />
+		</wsdl:operation>
+	</wsdl:portType>
+</wsdl:definitions>
