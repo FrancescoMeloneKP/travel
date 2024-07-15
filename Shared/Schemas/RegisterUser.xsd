@@ -1,46 +1,25 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:t="http://www.example.org/types" xmlns:tns="http://www.example.org/RegisterUser" elementFormDefault="qualified" targetNamespace="http://www.example.org/RegisterUser">
-  	
-  <import namespace="http://www.example.org/types" schemaLocation="types.xsd"/>
-  	
-  <complexType name="RegisterUserInput_type">
-    		
-    <sequence>
-      			
-      <element maxOccurs="1" minOccurs="1" name="regu_input" type="t:UserInfo_type"/>
-      		
-    </sequence>
-    	
-  </complexType>
-  	
-  <complexType name="RegisterUserOutput_type">
-    		
-    <sequence>
-      			
-      <element maxOccurs="1" minOccurs="1" name="regu_output" type="t:id_type"/>
-      		
-    </sequence>
-    	
-  </complexType>
-  	
-  <element name="register_user_input" type="tns:RegisterUserInput_type"/>
-  	
-  <element name="register_user_output" type="tns:RegisterUserOutput_type"/>
-      
-  <element name="operationRequest">
-    <complexType>
-      <sequence>
-        <element name="in" type="string"/>
-      </sequence>
-    </complexType>
-  </element>
-      
-  <element name="operationResponse">
-    <complexType>
-      <sequence>
-        <element name="out" type="string"/>
-      </sequence>
-    </complexType>
-  </element>
-  
+<schema xmlns="http://www.w3.org/2001/XMLSchema"
+	xmlns:t="http://www.example.org/types"
+	xmlns:tns="http://www.example.org/RegisterUser"
+	elementFormDefault="qualified"
+	targetNamespace="http://www.example.org/RegisterUser">
+	<import namespace="http://www.example.org/types"
+		schemaLocation="types.xsd" />
+	<complexType name="RegisterUserInput_type">
+		<sequence>
+			<element maxOccurs="1" minOccurs="1" name="regu_input"
+				type="t:UserInfo_type" />
+		</sequence>
+	</complexType>
+	<complexType name="RegisterUserOutput_type">
+		<sequence>
+			<element maxOccurs="1" minOccurs="1" name="regu_output"
+				type="t:id_type" />
+		</sequence>
+	</complexType>
+	<element name="register_user_input"
+		type="tns:RegisterUserInput_type" />
+	<element name="register_user_output"
+		type="tns:RegisterUserOutput_type" />
 </schema>
