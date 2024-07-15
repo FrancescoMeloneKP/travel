@@ -12,16 +12,16 @@
 	<wsdl:import location="../Schemas/RetrieveUser.xsd"
 		namespace="http://www.example.org/RetrieveUser" />
 	<wsdl:message name="RegisterUserRequest">
-		<wsdl:part name="body" type="reg:RegisterUserInput_type" />
+		<wsdl:part name="body" element="reg:register_user_input" />
 	</wsdl:message>
 	<wsdl:message name="RegisterUserResponse">
-		<wsdl:part name="body" type="reg:RegisterUserOutput_type" />
+		<wsdl:part name="body" element="reg:register_user_output" />
 	</wsdl:message>
 	<wsdl:message name="RetrieveUserRequest">
-		<wsdl:part name="body" type="ret:RetrieveUserInput_type" />
+		<wsdl:part name="body" element="ret:retrieve_user_input" />
 	</wsdl:message>
 	<wsdl:message name="RetrieveUserResponse">
-		<wsdl:part name="body" type="ret:RetrieveUserOutput_type" />
+		<wsdl:part name="body" element="ret:retrieve_user_output" />
 	</wsdl:message>
 	<wsdl:portType name="UserManager">
 		<wsdl:operation name="RegisterUser">
