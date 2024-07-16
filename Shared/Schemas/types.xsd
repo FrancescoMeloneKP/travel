@@ -12,6 +12,15 @@
 			<element name="userid" type="string" minOccurs="1" maxOccurs="1" ></element>
 		</sequence>
 	</complexType>
+	<complexType name="BookInfo_type">
+		<sequence>
+			<element name="b_id" type="string" minOccurs="1" maxOccurs="1"></element>
+			<element name="u_id" type="string" minOccurs="1" maxOccurs="1"></element>
+			<element name="destination" type="string" minOccurs="1" maxOccurs="1"></element>
+			<element name="flight_time" type="dateTime" minOccurs="1" maxOccurs="1"></element>
+		</sequence>
+	</complexType>
 	<element name="user_info" type="tns:UserInfo_type"/>
 	<element name="id" type="tns:id_type"/>
+	<element name="book_info" type="tns:BookInfo_type"/>
 </schema>
