@@ -1,17 +1,39 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<schema xmlns="http://www.w3.org/2001/XMLSchema" targetNamespace="http://www.example.org/types" xmlns:tns="http://www.example.org/types" elementFormDefault="qualified">
-<complexType name="UserInfo_type">
+<schema xmlns="http://www.w3.org/2001/XMLSchema"
+	targetNamespace="http://www.example.org/types"
+	xmlns:tns="http://www.example.org/types" elementFormDefault="qualified">
+	<complexType name="UserInfo_type">
 		<sequence>
-			<element name="f_name" type="string" minOccurs="1" maxOccurs="1"></element>
-			<element name="l_name" type="string" minOccurs="1" maxOccurs="1"></element>
-			<element name="p_number" type="string" minOccurs="1" maxOccurs="1"></element>
+			<element name="f_name" type="string" minOccurs="1"
+				maxOccurs="1"></element>
+			<element name="l_name" type="string" minOccurs="1"
+				maxOccurs="1"></element>
+			<element name="p_number" type="string" minOccurs="1"
+				maxOccurs="1"></element>
 		</sequence>
 	</complexType>
 	<complexType name="id_type">
 		<sequence>
-			<element name="userid" type="string" minOccurs="1" maxOccurs="1" ></element>
+			<element name="userid" type="string" minOccurs="1"
+				maxOccurs="1"></element>
 		</sequence>
 	</complexType>
-	<element name="user_info" type="tns:UserInfo_type"/>
-	<element name="id" type="tns:id_type"/>
+	<complexType name="destflight_type">
+		<sequence>
+			<element name="destination" type="string" minOccurs="1"
+				maxOccurs="1"></element>
+			<element name="flight_time" type="dateTime" minOccurs="1"
+				maxOccurs="1"></element>
+		</sequence>
+	</complexType>
+	<complexType name="book_info_type">
+		<sequence>
+			<element name="book_id" type="tns:id_type" minOccurs="1" maxOccurs="1" ></element>
+			<element name="d_f" type="tns:destflight_type" minOccurs="1" maxOccurs="1" ></element>
+		</sequence>
+	</complexType>
+	<element name="user_info" type="tns:UserInfo_type" />
+	<element name="id" type="tns:id_type" />
+	<element name="destflight" type="tns:destflight_type" />
+	<element name="book_info" type="tns:book_info_type" />
 </schema>

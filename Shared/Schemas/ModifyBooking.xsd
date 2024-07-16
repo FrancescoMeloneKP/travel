@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema"
+	targetNamespace="http://www.example.org/ModifyBooking"
+	xmlns:tns="http://www.example.org/ModifyBooking"
+	xmlns:t="http://www.example.org/types"
+	elementFormDefault="qualified">
+	<import namespace="http://www.example.org/types"
+		schemaLocation="types.xsd" />
+	<complexType name="ModifyBooking_input_type">
+		<sequence>
+			<element name="b_mod" type="t:book_info_type" minOccurs="1" maxOccurs="1"/>
+		</sequence>
+	</complexType>
+	<element name="modify_book_input" type="tns:ModifyBooking_input_type" />
+</schema>

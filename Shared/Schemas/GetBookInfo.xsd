@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema"
+	targetNamespace="http://www.example.org/GetBookInfo"
+	xmlns:tns="http://www.example.org/GetBookInfo"
+	xmlns:t="http://www.example.org/types"
+	elementFormDefault="qualified">
+	<import namespace="http://www.example.org/types"
+		schemaLocation="types.xsd" />
+	<complexType name="GetBookInfo_input_type">
+		<sequence>
+			<element name="b_id" type="t:id_type" minOccurs="1" maxOccurs="1"/>
+		</sequence>
+	</complexType>
+	<complexType name="GetBookInfo_output_type">
+		<sequence>
+			<element name="b_info" type="t:book_info_type" minOccurs="1" maxOccurs="1"/>
+		</sequence>
+	</complexType>
+	<element name="get_book_info_output" type="tns:GetBookInfo_output_type" />
+	<element name="get_book_info_input" type="tns:GetBookInfo_input_type" />
+</schema>
