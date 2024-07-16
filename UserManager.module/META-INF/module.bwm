@@ -42,6 +42,9 @@
         <clientRequestFormat>json</clientRequestFormat>
       </operation>
       <operation xmi:id="_5fTiQUNfEe-xyuBTn9uQEA" operationName="get" nickname="get-BookManager" httpMethod="GET" notes="getResource" responseStyle="element" outputPartName="item">
+        <parameters xmi:id="_JpZo8EN5Ee-xyuBTn9uQEA">
+          <parameterMapping xmi:id="_JpZo8UN5Ee-xyuBTn9uQEA" parameterName="book_id" parameterType="Query" dataType="string" required="true" description=""/>
+        </parameters>
         <clientFormat>json</clientFormat>
         <clientRequestFormat>json</clientRequestFormat>
       </operation>
@@ -50,6 +53,9 @@
         <clientRequestFormat>json</clientRequestFormat>
       </operation>
       <operation xmi:id="_5fTiQ0NfEe-xyuBTn9uQEA" operationName="delete" nickname="delete-BookManager" httpMethod="DELETE" notes="deleteResource" responseStyle="element" outputPartName="msg">
+        <parameters xmi:id="_T3lpUEN7Ee-xyuBTn9uQEA">
+          <parameterMapping xmi:id="_T3lpUUN7Ee-xyuBTn9uQEA" parameterName="book_id" parameterType="Query" dataType="string" required="true" description=""/>
+        </parameters>
         <clientFormat>json</clientFormat>
         <clientRequestFormat>json</clientRequestFormat>
       </operation>

@@ -27,6 +27,13 @@
         <task name="getOut">
             <endingVariables>
                 <variable>getOut-input</variable>
+                <variable>Get</variable>
+            </endingVariables>
+        </task>
+        <task name="Get">
+            <endingVariables>
+                <variable>Get-input</variable>
+                <variable>get</variable>
             </endingVariables>
         </task>
         <task name="putOut">
@@ -37,11 +44,18 @@
         <task name="Put">
             <endingVariables>
                 <variable>Put-input</variable>
+                <variable>put</variable>
             </endingVariables>
         </task>
         <task name="deleteOut">
             <endingVariables>
                 <variable>deleteOut-input</variable>
+            </endingVariables>
+        </task>
+        <task name="Delete">
+            <endingVariables>
+                <variable>Delete-input</variable>
+                <variable>delete</variable>
             </endingVariables>
         </task>
     </tibex:VariableDescriptor>
@@ -210,6 +224,7 @@
             targetNamespace="http://xmlns.example.com/20240716124102PLT"
             xmlns:extns="http://www.example.org/types"
             xmlns:extns1="http://tns.tibco.com/bw/REST"
+            xmlns:extns2="http://xmlns.example.com/Resource/parameters"
             xmlns:plnk="http://docs.oasis-open.org/wsbpel/2.0/plnktype"
             xmlns:tibex="http://www.tibco.com/bpel/2007/extensions"
             xmlns:tns="http://xmlns.example.com/20240716124102PLT"
@@ -220,6 +235,7 @@
             </plnk:partnerLinkType>
             <wsdl:import namespace="http://www.example.org/types"/>
             <wsdl:import namespace="http://tns.tibco.com/bw/REST"/>
+            <wsdl:import namespace="http://xmlns.example.com/Resource/parameters"/>
             <wsdl:message name="postRequest">
                 <wsdl:part element="extns:book_info" name="item" tibex:hasMultipleNamespaces="false"/>
                 <wsdl:part element="extns1:httpHeaders"
@@ -238,6 +254,8 @@
             <wsdl:message name="getRequest">
                 <wsdl:part element="extns1:httpHeaders"
                     name="httpHeaders" tibex:source="bw.rest"/>
+                <wsdl:part element="extns2:BookManagerGetParameters"
+                    name="parameters" tibex:source="bw.rest"/>
             </wsdl:message>
             <wsdl:message name="getResponse">
                 <wsdl:part element="extns:book_info" name="item" tibex:hasMultipleNamespaces="false"/>
@@ -266,6 +284,8 @@
             <wsdl:message name="deleteRequest">
                 <wsdl:part element="extns1:httpHeaders"
                     name="httpHeaders" tibex:source="bw.rest"/>
+                <wsdl:part element="extns2:BookManagerDeleteParameters"
+                    name="parameters" tibex:source="bw.rest"/>
             </wsdl:message>
             <wsdl:message name="deleteResponse">
                 <wsdl:part name="msg"
@@ -1709,9 +1729,12 @@
         <tibex:namespaceItem namespace="http://www.example.org/types" prefix="tns"/>
         <tibex:namespaceItem
             namespace="http://xmlns.example.com/20240716124102PLT" prefix="tns1"/>
+        <tibex:namespaceItem
+            namespace="http://xmlns.example.com/Resource/parameters" prefix="tns2"/>
     </tibex:NamespaceRegistry>
     <bpws:import importType="http://www.w3.org/2001/XMLSchema" namespace="http://www.example.org/types"/>
     <bpws:import importType="http://www.w3.org/2001/XMLSchema" namespace="http://tns.tibco.com/bw/REST"/>
+    <bpws:import importType="http://www.w3.org/2001/XMLSchema" namespace="http://xmlns.example.com/Resource/parameters"/>
     <bpws:partnerLinks>
         <bpws:partnerLink myRole="use" name="BookManager"
             partnerLinkType="ns:partnerLinkType" sca-bpel:ignore="false" sca-bpel:service="BookManager"/>
@@ -1732,6 +1755,9 @@
         <bpws:variable element="ns1:book_info" name="Post-input" sca-bpel:internal="true"/>
         <bpws:variable element="ns1:book_info" name="Put-input" sca-bpel:internal="true"/>
         <bpws:variable element="ns1:book_id" name="Post" sca-bpel:internal="true"/>
+        <bpws:variable element="ns1:book_id" name="Get-input" sca-bpel:internal="true"/>
+        <bpws:variable element="ns1:book_info" name="Get" sca-bpel:internal="true"/>
+        <bpws:variable element="ns1:book_id" name="Delete-input" sca-bpel:internal="true"/>
     </bpws:variables>
     <bpws:extensions>
         <bpws:extension mustUnderstand="no" namespace="http://www.eclipse.org/gmf/runtime/1.0.2/notation"/>
@@ -1826,14 +1852,20 @@
                                 tibex:xpdlId="3942e6dc-2700-4c39-9dbd-029f87b1251c" variable="getOut-input">
                                 <tibex:inputBindings>
                                     <tibex:partBinding
-                                    expression="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?>&#xa;&lt;xsl:stylesheet xmlns:xsl=&quot;http://www.w3.org/1999/XSL/Transform&quot; xmlns:tns1=&quot;http://xmlns.example.com/20240716124102PLT&quot; version=&quot;2.0&quot;>&#xa;    &lt;xsl:template name=&quot;getOut-input&quot; match=&quot;/&quot;>&#xa;        &lt;tns1:getResponse/>&#xa;    &lt;/xsl:template>&#xa;&lt;/xsl:stylesheet>" expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xslt1.0"/>
+                                    expression="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?>&#xa;&lt;xsl:stylesheet xmlns:xsl=&quot;http://www.w3.org/1999/XSL/Transform&quot; xmlns:tns1=&quot;http://xmlns.example.com/20240716124102PLT&quot; version=&quot;2.0&quot;>&#xa;    &lt;xsl:param name=&quot;Get&quot;/>&#xa;    &lt;xsl:template name=&quot;getOut-input&quot; match=&quot;/&quot;>&#xa;        &lt;xsl:copy-of select=&quot;$Get&quot;/>&#xa;    &lt;/xsl:template>&#xa;&lt;/xsl:stylesheet>" expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xslt1.0"/>
                                 </tibex:inputBindings>
+                                <tibex:inputBinding expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xslt1.0">&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+&lt;xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:tns1="http://xmlns.example.com/20240716124102PLT" version="2.0"&gt;&lt;xsl:param name="Get"/&gt;&lt;xsl:template name="getOut-input" match="/"&gt;&lt;tns1:getResponse&gt;&lt;item&gt;&lt;xsl:copy-of select="$Get"/&gt;&lt;/item&gt;&lt;/tns1:getResponse&gt;&lt;/xsl:template&gt;&lt;/xsl:stylesheet&gt;</tibex:inputBinding>
                                 <bpws:targets>
                                     <bpws:target linkName="CallProcess1TogetOut"/>
                                 </bpws:targets>
                             </bpws:reply>
                             <bpws:extensionActivity>
-                                <tibex:extActivity name="Get"
+                                <tibex:extActivity
+                                    expression="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?>&#xa;&lt;xsl:stylesheet xmlns:xsl=&quot;http://www.w3.org/1999/XSL/Transform&quot; xmlns:tns2=&quot;http://xmlns.example.com/Resource/parameters&quot; xmlns:tns=&quot;http://www.example.org/types&quot; version=&quot;2.0&quot;>&#xa;    &lt;xsl:param name=&quot;get&quot;/>&#xa;    &lt;xsl:template name=&quot;Get-input&quot; match=&quot;/&quot;>&#xa;        &lt;tns:book_id>&#xa;            &lt;xsl:value-of select=&quot;$get/parameters/tns2:BookManagerGetParameters/tns2:book_id&quot;/>&#xa;        &lt;/tns:book_id>&#xa;    &lt;/xsl:template>&#xa;&lt;/xsl:stylesheet>"
+                                    expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xslt1.0"
+                                    inputVariable="Get-input" name="Get"
+                                    outputVariable="Get"
                                     tibex:xpdlId="e816dcca-4d21-4a06-afdc-f244440426a1"
                                     type="bw.generalactivities.callprocess" xmlns:tibex="http://www.tibco.com/bpel/2007/extensions">
                                     <bpws:targets>
@@ -1842,6 +1874,10 @@
                                     <bpws:sources>
                                     <bpws:source linkName="CallProcess1TogetOut"/>
                                     </bpws:sources>
+                                    <tibex:inputBindings>
+                                    <tibex:inputBinding coercion=""
+                                    expression="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?>&#xa;&lt;xsl:stylesheet xmlns:xsl=&quot;http://www.w3.org/1999/XSL/Transform&quot; xmlns:tns2=&quot;http://xmlns.example.com/Resource/parameters&quot; xmlns:tns=&quot;http://www.example.org/types&quot; version=&quot;2.0&quot;>&#xa;    &lt;xsl:param name=&quot;get.parameters&quot;/>&#xa;    &lt;xsl:template name=&quot;Get-input&quot; match=&quot;/&quot;>&#xa;        &lt;tns:book_id>&#xa;            &lt;xsl:value-of select=&quot;$get.parameters/tns2:book_id&quot;/>&#xa;        &lt;/tns:book_id>&#xa;    &lt;/xsl:template>&#xa;&lt;/xsl:stylesheet>" expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xslt1.0"/>
+                                    </tibex:inputBindings>
                                     <tibex:CallProcess
                                     subProcessName="usermanager.module.Get" xmlns:tibex="http://www.tibco.com/bpel/2007/extensions"/>
                                 </tibex:extActivity>
@@ -1873,14 +1909,18 @@
                                 tibex:xpdlId="61d5e4d9-7a2a-483f-8cf7-0cd0372ad057" variable="putOut-input">
                                 <tibex:inputBindings>
                                     <tibex:partBinding
-                                    expression="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?>&#xa;&lt;xsl:stylesheet xmlns:xsl=&quot;http://www.w3.org/1999/XSL/Transform&quot; xmlns:tns1=&quot;http://xmlns.example.com/20240716124102PLT&quot; version=&quot;2.0&quot;>&#xa;    &lt;xsl:template name=&quot;putOut-input&quot; match=&quot;/&quot;>&#xa;        &lt;tns1:putResponse/>&#xa;    &lt;/xsl:template>&#xa;&lt;/xsl:stylesheet>" expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xslt1.0"/>
+                                    expression="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?>&#xa;&lt;xsl:stylesheet xmlns:xsl=&quot;http://www.w3.org/1999/XSL/Transform&quot; xmlns:tns1=&quot;http://xmlns.example.com/20240716124102PLT&quot; version=&quot;2.0&quot;>&#xa;    &lt;xsl:template name=&quot;putOut-input&quot; match=&quot;/&quot;>&#xa;        &lt;item>&#xa;            &lt;xsl:value-of select=&quot;'update completed'&quot;/>&#xa;        &lt;/item>&#xa;    &lt;/xsl:template>&#xa;&lt;/xsl:stylesheet>" expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xslt1.0"/>
                                 </tibex:inputBindings>
+                                <tibex:inputBinding expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xslt1.0">&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+&lt;xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:tns1="http://xmlns.example.com/20240716124102PLT" version="2.0"&gt;&lt;xsl:template name="putOut-input" match="/"&gt;&lt;tns1:putResponse&gt;&lt;item&gt;&lt;xsl:value-of select="'update completed'"/&gt;&lt;/item&gt;&lt;/tns1:putResponse&gt;&lt;/xsl:template&gt;&lt;/xsl:stylesheet&gt;</tibex:inputBinding>
                                 <bpws:targets>
                                     <bpws:target linkName="CallProcess2ToputOut"/>
                                 </bpws:targets>
                             </bpws:reply>
                             <bpws:extensionActivity>
                                 <tibex:extActivity
+                                    expression="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?>&#xa;&lt;xsl:stylesheet xmlns:xsl=&quot;http://www.w3.org/1999/XSL/Transform&quot; xmlns:tns=&quot;http://www.example.org/types&quot; version=&quot;2.0&quot;>&lt;xsl:param name=&quot;put&quot;/>&lt;xsl:template name=&quot;Put-input&quot; match=&quot;/&quot;>&lt;xsl:copy-of select=&quot;$put/item/tns:book_info&quot;/>&lt;/xsl:template>&lt;/xsl:stylesheet>"
+                                    expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xslt1.0"
                                     inputVariable="Put-input" name="Put"
                                     tibex:xpdlId="09c8a498-b159-473e-b8ed-bb1755516a2e"
                                     type="bw.generalactivities.callprocess" xmlns:tibex="http://www.tibco.com/bpel/2007/extensions">
@@ -1890,6 +1930,10 @@
                                     <bpws:sources>
                                     <bpws:source linkName="CallProcess2ToputOut"/>
                                     </bpws:sources>
+                                    <tibex:inputBindings>
+                                    <tibex:inputBinding coercion=""
+                                    expression="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?>&#xa;&lt;xsl:stylesheet xmlns:xsl=&quot;http://www.w3.org/1999/XSL/Transform&quot; xmlns:tns=&quot;http://www.example.org/types&quot; version=&quot;2.0&quot;>&#xa;    &lt;xsl:param name=&quot;put.item&quot;/>&#xa;    &lt;xsl:template name=&quot;Put-input&quot; match=&quot;/&quot;>&#xa;        &lt;xsl:copy-of select=&quot;$put.item&quot;/>&#xa;    &lt;/xsl:template>&#xa;&lt;/xsl:stylesheet>" expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xslt1.0"/>
+                                    </tibex:inputBindings>
                                     <tibex:CallProcess
                                     subProcessName="usermanager.module.Put" xmlns:tibex="http://www.tibco.com/bpel/2007/extensions"/>
                                 </tibex:extActivity>
@@ -1923,14 +1967,20 @@
                                 tibex:xpdlId="b3885130-868d-4611-a9bd-74499e87b8fb" variable="deleteOut-input">
                                 <tibex:inputBindings>
                                     <tibex:partBinding
-                                    expression="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?>&#xa;&lt;xsl:stylesheet xmlns:xsl=&quot;http://www.w3.org/1999/XSL/Transform&quot; xmlns:tns1=&quot;http://xmlns.example.com/20240716124102PLT&quot; version=&quot;2.0&quot;>&#xa;    &lt;xsl:template name=&quot;deleteOut-input&quot; match=&quot;/&quot;>&#xa;        &lt;tns1:deleteResponse/>&#xa;    &lt;/xsl:template>&#xa;&lt;/xsl:stylesheet>" expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xslt1.0"/>
+                                    expression="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?>&#xa;&lt;xsl:stylesheet xmlns:xsl=&quot;http://www.w3.org/1999/XSL/Transform&quot; xmlns:tns1=&quot;http://xmlns.example.com/20240716124102PLT&quot; version=&quot;2.0&quot;>&#xa;    &lt;xsl:template name=&quot;deleteOut-input&quot; match=&quot;/&quot;>&#xa;        &lt;msg>&#xa;            &lt;xsl:value-of select=&quot;'the booking has been deleted'&quot;/>&#xa;        &lt;/msg>&#xa;    &lt;/xsl:template>&#xa;&lt;/xsl:stylesheet>" expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xslt1.0"/>
                                 </tibex:inputBindings>
+                                <tibex:inputBinding expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xslt1.0">&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+&lt;xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:tns1="http://xmlns.example.com/20240716124102PLT" version="2.0"&gt;&lt;xsl:template name="deleteOut-input" match="/"&gt;&lt;tns1:deleteResponse&gt;&lt;msg&gt;&lt;xsl:value-of select="'the booking has been deleted'"/&gt;&lt;/msg&gt;&lt;/tns1:deleteResponse&gt;&lt;/xsl:template&gt;&lt;/xsl:stylesheet&gt;</tibex:inputBinding>
                                 <bpws:targets>
                                     <bpws:target linkName="CallProcess3TodeleteOut"/>
                                 </bpws:targets>
                             </bpws:reply>
                             <bpws:extensionActivity>
-                                <tibex:extActivity name="Delete"
+                                <tibex:extActivity
+                                    expression="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?>&#xa;&lt;xsl:stylesheet xmlns:xsl=&quot;http://www.w3.org/1999/XSL/Transform&quot; xmlns:tns2=&quot;http://xmlns.example.com/Resource/parameters&quot; xmlns:tns=&quot;http://www.example.org/types&quot; version=&quot;2.0&quot;>&lt;xsl:param name=&quot;delete&quot;/>&lt;xsl:template name=&quot;Delete-input&quot; match=&quot;/&quot;>&lt;tns:book_id>&lt;xsl:value-of select=&quot;$delete/parameters/tns2:BookManagerDeleteParameters/tns2:book_id&quot;/>&lt;/tns:book_id>&lt;/xsl:template>&lt;/xsl:stylesheet>"
+                                    expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xslt1.0"
+                                    inputVariable="Delete-input"
+                                    name="Delete"
                                     tibex:xpdlId="bf95da91-c665-459d-a515-a6166c92d6b2"
                                     type="bw.generalactivities.callprocess" xmlns:tibex="http://www.tibco.com/bpel/2007/extensions">
                                     <bpws:targets>
@@ -1939,6 +1989,10 @@
                                     <bpws:sources>
                                     <bpws:source linkName="CallProcess3TodeleteOut"/>
                                     </bpws:sources>
+                                    <tibex:inputBindings>
+                                    <tibex:inputBinding coercion=""
+                                    expression="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?>&#xa;&lt;xsl:stylesheet xmlns:xsl=&quot;http://www.w3.org/1999/XSL/Transform&quot; xmlns:tns2=&quot;http://xmlns.example.com/Resource/parameters&quot; xmlns:tns=&quot;http://www.example.org/types&quot; version=&quot;2.0&quot;>&#xa;    &lt;xsl:param name=&quot;delete.parameters&quot;/>&#xa;    &lt;xsl:template name=&quot;Delete-input&quot; match=&quot;/&quot;>&#xa;        &lt;tns:book_id>&#xa;            &lt;xsl:value-of select=&quot;$delete.parameters/tns2:book_id&quot;/>&#xa;        &lt;/tns:book_id>&#xa;    &lt;/xsl:template>&#xa;&lt;/xsl:stylesheet>" expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xslt1.0"/>
+                                    </tibex:inputBindings>
                                     <tibex:CallProcess
                                     subProcessName="usermanager.module.Delete" xmlns:tibex="http://www.tibco.com/bpel/2007/extensions"/>
                                 </tibex:extActivity>
