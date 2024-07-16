@@ -1,0 +1,5 @@
+{"records": [{
+    "jsonSchemaLocation": "/UserManager.module/Service Descriptors/usermanager.module.BookManager-Resource.json",
+    "conversionType": "linked",
+    "xsdSchemaTargetNamespace": "http://www.example.org/types"
+}]}

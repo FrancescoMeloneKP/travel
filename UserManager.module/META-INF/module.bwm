@@ -1,15 +1,82 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<sca:composite xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:BW="http://xsd.tns.tibco.com/amf/models/sca/implementationtype/BW" xmlns:XMLSchema="http://www.w3.org/2001/XMLSchema" xmlns:compositeext="http://schemas.tibco.com/amx/3.0/compositeext" xmlns:sca="http://www.osoa.org/xmlns/sca/1.0" xmlns:scaext="http://xsd.tns.tibco.com/amf/models/sca/extensions" xmi:id="_NqfzAEBcEe-fz6FUXG5cxw" targetNamespace="http://tns.tibco.com/bw/composite/UserManager.module" name="UserManager.module" compositeext:version="1.0.0" compositeext:formatVersion="2">
-  <sca:property xmi:id="_PPgB8EBcEe-fz6FUXG5cxw" name="BW.DEPLOYMENTUNIT.TYPE" type="XMLSchema:string" scalable="true"/>
-  <sca:property xmi:id="_PP2AMEBcEe-fz6FUXG5cxw" name="BW.APPNODE.NAME" type="XMLSchema:string" scalable="true"/>
-  <sca:property xmi:id="_PP-jEEBcEe-fz6FUXG5cxw" name="BW.DEPLOYMENTUNIT.NAME" type="XMLSchema:string" scalable="true"/>
-  <sca:property xmi:id="_PQL-cEBcEe-fz6FUXG5cxw" name="BW.HOST.NAME" type="XMLSchema:string" scalable="true"/>
-  <sca:property xmi:id="_PQSFEEBcEe-fz6FUXG5cxw" name="BW.DOMAIN.NAME" type="XMLSchema:string" scalable="true"/>
-  <sca:property xmi:id="_PQbPAEBcEe-fz6FUXG5cxw" name="BW.DEPLOYMENTUNIT.VERSION" type="XMLSchema:string" scalable="true"/>
-  <sca:property xmi:id="_PQgukEBcEe-fz6FUXG5cxw" name="BW.APPSPACE.NAME" type="XMLSchema:string" scalable="true"/>
-  <sca:property xmi:id="_PQlAAEBcEe-fz6FUXG5cxw" name="BW.MODULE.VERSION" type="XMLSchema:string" scalable="true"/>
-  <sca:property xmi:id="_PQoDUEBcEe-fz6FUXG5cxw" name="BW.MODULE.NAME" type="XMLSchema:string" scalable="true"/>
-  <sca:component xmi:id="_OemJcEBcEe-fz6FUXG5cxw" name="ComponentProcess" compositeext:version="1.0.0.qualifier">
-    <scaext:implementation xsi:type="BW:BWComponentImplementation" xmi:id="_Oev6cEBcEe-fz6FUXG5cxw" processName="usermanager.module.Process"/>
+<sca:composite xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:BW="http://xsd.tns.tibco.com/amf/models/sca/implementationtype/BW" xmlns:RegisterUser="http://www.example.org/RegisterUser" xmlns:RetrieveUser="http://www.example.org/RetrieveUser" xmlns:UserManager="http://www.tibco.com/UserManager/" xmlns:XMLSchema="http://www.w3.org/2001/XMLSchema" xmlns:axis2="http://xsd.tns.tibco.com/bw/models/binding/soap/axis2" xmlns:compositeext="http://schemas.tibco.com/amx/3.0/compositeext" xmlns:rest="http://xsd.tns.tibco.com/bw/models/binding/rest" xmlns:sca="http://www.osoa.org/xmlns/sca/1.0" xmlns:scact="http://xsd.tns.tibco.com/amf/models/sca/componentType" xmlns:scaext="http://xsd.tns.tibco.com/amf/models/sca/extensions" xmi:id="_Y5tEIEBhEe-fz6FUXG5cxw" targetNamespace="http://tns.tibco.com/bw/composite/UserManager.module" name="UserManager.module" compositeext:version="1.0.0" compositeext:formatVersion="2">
+  <sca:service xmi:id="_OUsF4kBkEe-fz6FUXG5cxw" name="UserManager" promote="ComponentProcess/UserManager">
+    <sca:interface.wsdl xmi:id="_OUsF5kBkEe-fz6FUXG5cxw" interface="http://www.tibco.com/UserManager/#wsdl.interface(UserManager)" scaext:wsdlLocation="../../Shared/Service%20Descriptors/UserManager.wsdl"/>
+    <scaext:binding xsi:type="axis2:SOAPServiceBinding" xmi:id="_ULJ74EKGEe-6satppU5DUQ" name="SOAPServiceBinding" targetNamespace="http://www.tibco.com/064abab489854384b38db58745efa08f/SOAPServiceBinding" portTypeQName="UserManager:UserManager" transportBindingType="HTTP" attachmentStyle="SwA" modelVersion="1.2.0" portTypeWSDLLocation="platform:/resource/Shared/Service%20Descriptors/UserManager.wsdl">
+      <bindingType xmi:id="_ULbosEKGEe-6satppU5DUQ"/>
+      <inboundConfiguration xsi:type="axis2:HttpTransportConfiguration" xmi:id="_ZAkLoEKGEe-6satppU5DUQ" endpointURI="/SOAPServiceBinding/userManager/" httpConnector="shared.HTTPConnectorResource"/>
+      <operationConfiguration xmi:id="_ULhIQEKGEe-6satppU5DUQ" operationName="RegisterUser" action="RegisterUser" actionNeeded="true">
+        <bindingType xmi:id="_ULhIQUKGEe-6satppU5DUQ"/>
+        <messageConfiguration xmi:id="_ULhIQkKGEe-6satppU5DUQ" messageQName="UserManager:RegisterUserRequest" wsdlLocation="platform:/resource/Shared/Service%20Descriptors/UserManager.wsdl">
+          <messagePartConfigurations xsi:type="axis2:BodyPartConfiguration" xmi:id="_ULhIQ0KGEe-6satppU5DUQ" partName="body" partTypeName="RegisterUser:RegisterUserInput_type"/>
+        </messageConfiguration>
+        <messageConfiguration xmi:id="_ULhIREKGEe-6satppU5DUQ" messageQName="UserManager:RegisterUserResponse" messageDirection="OUTPUT" wsdlLocation="platform:/resource/Shared/Service%20Descriptors/UserManager.wsdl">
+          <messagePartConfigurations xsi:type="axis2:BodyPartConfiguration" xmi:id="_ULhIRUKGEe-6satppU5DUQ" partName="body" partTypeName="RegisterUser:RegisterUserOutput_type"/>
+        </messageConfiguration>
+        <context xmi:id="_ULhITEKGEe-6satppU5DUQ">
+          <inputMapping xmi:id="_ULhITUKGEe-6satppU5DUQ"/>
+          <outputMapping xmi:id="_ULhITkKGEe-6satppU5DUQ" direction="OUTPUT"/>
+        </context>
+      </operationConfiguration>
+      <operationConfiguration xmi:id="_ULhIRkKGEe-6satppU5DUQ" operationName="RetrieveUser" action="RetrieveUser" actionNeeded="true">
+        <bindingType xmi:id="_ULhIR0KGEe-6satppU5DUQ"/>
+        <messageConfiguration xmi:id="_ULhISEKGEe-6satppU5DUQ" messageQName="UserManager:RetrieveUserRequest" wsdlLocation="platform:/resource/Shared/Service%20Descriptors/UserManager.wsdl">
+          <messagePartConfigurations xsi:type="axis2:BodyPartConfiguration" xmi:id="_ULhISUKGEe-6satppU5DUQ" partName="body" partTypeName="RetrieveUser:RetrieveUserInput_type"/>
+        </messageConfiguration>
+        <messageConfiguration xmi:id="_ULhISkKGEe-6satppU5DUQ" messageQName="UserManager:RetrieveUserResponse" messageDirection="OUTPUT" wsdlLocation="platform:/resource/Shared/Service%20Descriptors/UserManager.wsdl">
+          <messagePartConfigurations xsi:type="axis2:BodyPartConfiguration" xmi:id="_ULhIS0KGEe-6satppU5DUQ" partName="body" partTypeName="RetrieveUser:RetrieveUserOutput_type"/>
+        </messageConfiguration>
+        <context xmi:id="_ULhIT0KGEe-6satppU5DUQ">
+          <inputMapping xmi:id="_ULhIUEKGEe-6satppU5DUQ"/>
+          <outputMapping xmi:id="_ULhIUUKGEe-6satppU5DUQ" direction="OUTPUT"/>
+        </context>
+      </operationConfiguration>
+    </scaext:binding>
+    <scact:bindingAdjunct xmi:id="_ULkyoEKGEe-6satppU5DUQ" bindingName="SOAPServiceBinding"/>
+  </sca:service>
+  <sca:service xmi:id="_5fOCtENfEe-xyuBTn9uQEA" name="BookManager" promote="ComponentBookManager/BookManager">
+    <sca:interface.wsdl xmi:id="_5fOCuENfEe-xyuBTn9uQEA" interface="http://xmlns.example.com/20240716124102PLT#wsdl.interface(BookManager)" scaext:wsdlLocation="../Processes/usermanager/module/BookManager.bwp"/>
+    <scaext:binding xsi:type="rest:RestServiceBinding" xmi:id="_5fOCuUNfEe-xyuBTn9uQEA" name="RestService" path="/BookManager" docBasePath="http://localhost:7777/UserManager.module" docResourcePath="Resource" basePath="/" connector="usermanager.module.Resource" structuredData="true" technologyVersion="2.0" implementation="Service Descriptors/usermanager.module.BookManager-Resource.json">
+      <operation xmi:id="_5fTiQENfEe-xyuBTn9uQEA" operationName="post" nickname="post-BookManager" httpMethod="POST" notes="postResource" responseStyle="element" requestStyle="element" outputPartName="item">
+        <clientFormat>json</clientFormat>
+        <clientRequestFormat>json</clientRequestFormat>
+      </operation>
+      <operation xmi:id="_5fTiQUNfEe-xyuBTn9uQEA" operationName="get" nickname="get-BookManager" httpMethod="GET" notes="getResource" responseStyle="element" outputPartName="item">
+        <clientFormat>json</clientFormat>
+        <clientRequestFormat>json</clientRequestFormat>
+      </operation>
+      <operation xmi:id="_5fTiQkNfEe-xyuBTn9uQEA" operationName="put" nickname="put-BookManager" httpMethod="PUT" notes="putResource" responseStyle="element" requestStyle="element" outputPartName="item">
+        <clientFormat>json</clientFormat>
+        <clientRequestFormat>json</clientRequestFormat>
+      </operation>
+      <operation xmi:id="_5fTiQ0NfEe-xyuBTn9uQEA" operationName="delete" nickname="delete-BookManager" httpMethod="DELETE" notes="deleteResource" responseStyle="element" outputPartName="msg">
+        <clientFormat>json</clientFormat>
+        <clientRequestFormat>json</clientRequestFormat>
+      </operation>
+      <parameters xmi:id="_5fXzsENfEe-xyuBTn9uQEA"/>
+      <advancedConfig xmi:id="_5fOCukNfEe-xyuBTn9uQEA" blockingQueueSize="8192"/>
+    </scaext:binding>
+    <scact:bindingAdjunct xmi:id="_5fTiRENfEe-xyuBTn9uQEA" bindingName="RestService"/>
+  </sca:service>
+  <sca:property xmi:id="_ZyUHIEBhEe-fz6FUXG5cxw" name="BW.DEPLOYMENTUNIT.TYPE" type="XMLSchema:string" scalable="true"/>
+  <sca:property xmi:id="_Zyd4IEBhEe-fz6FUXG5cxw" name="BW.APPNODE.NAME" type="XMLSchema:string" scalable="true"/>
+  <sca:property xmi:id="_Zyd4IUBhEe-fz6FUXG5cxw" name="BW.DEPLOYMENTUNIT.NAME" type="XMLSchema:string" scalable="true"/>
+  <sca:property xmi:id="_Zyd4IkBhEe-fz6FUXG5cxw" name="BW.HOST.NAME" type="XMLSchema:string" scalable="true"/>
+  <sca:property xmi:id="_Zyd4I0BhEe-fz6FUXG5cxw" name="BW.DOMAIN.NAME" type="XMLSchema:string" scalable="true"/>
+  <sca:property xmi:id="_Zyd4JEBhEe-fz6FUXG5cxw" name="BW.DEPLOYMENTUNIT.VERSION" type="XMLSchema:string" scalable="true"/>
+  <sca:property xmi:id="_ZynpIEBhEe-fz6FUXG5cxw" name="BW.APPSPACE.NAME" type="XMLSchema:string" scalable="true"/>
+  <sca:property xmi:id="_ZynpIUBhEe-fz6FUXG5cxw" name="BW.MODULE.VERSION" type="XMLSchema:string" scalable="true"/>
+  <sca:property xmi:id="_ZynpIkBhEe-fz6FUXG5cxw" name="BW.MODULE.NAME" type="XMLSchema:string" scalable="true"/>
+  <sca:component xmi:id="_HMmB0EBkEe-fz6FUXG5cxw" name="ComponentProcess" compositeext:version="1.0.0.qualifier">
+    <scaext:implementation xsi:type="BW:BWComponentImplementation" xmi:id="_HMmB0UBkEe-fz6FUXG5cxw" processName="usermanager.module.Process"/>
+    <sca:service xmi:id="_OUsF4EBkEe-fz6FUXG5cxw" name="UserManager">
+      <sca:interface.wsdl xmi:id="_OUsF4UBkEe-fz6FUXG5cxw" interface="http://www.tibco.com/UserManager/#wsdl.interface(UserManager)" scaext:wsdlLocation="../../Shared/Service%20Descriptors/UserManager.wsdl"/>
+    </sca:service>
+  </sca:component>
+  <sca:component xmi:id="_5fOCsENfEe-xyuBTn9uQEA" name="ComponentBookManager" compositeext:version="1.0.0.qualifier">
+    <scaext:implementation xsi:type="BW:BWComponentImplementation" xmi:id="_5fOCsUNfEe-xyuBTn9uQEA" processName="usermanager.module.BookManager"/>
+    <sca:service xmi:id="_5fOCskNfEe-xyuBTn9uQEA" name="BookManager">
+      <sca:interface.wsdl xmi:id="_5fOCs0NfEe-xyuBTn9uQEA" interface="http://xmlns.example.com/20240716124102PLT#wsdl.interface(BookManager)" scaext:wsdlLocation="../Processes/usermanager/module/BookManager.bwp"/>
+    </sca:service>
   </sca:component>
 </sca:composite>
